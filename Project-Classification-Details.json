@@ -1,0 +1,131 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "umol0m8f6qtx7"
+  },
+  "info": {
+    "title": "Project Classification Details",
+    "version": "1.0",
+    "summary": "Retrieve classification details for a project",
+    "description": "This API is used to get classification details for all images in a project."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8001"
+    }
+  ],
+  "paths": {
+    "/api/classification/{project_id}/": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "integer"
+          },
+          "name": "project_id",
+          "in": "path",
+          "required": true,
+          "description": "Project ID"
+        }
+      ],
+      "get": {
+        "summary": "Get User Info by User ID",
+        "tags": [],
+        "operationId": "get-classification-details",
+        "description": "Get Image Classification information",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "api_request": {
+                        "Single Images": {
+                          "19314": {
+                            "image_name": "image_89472.png",
+                            "classified": true
+                          }
+                        }
+                      },
+                      "classified_dict": {
+                        "class1": {
+                          "19314": {
+                            "image_name": "image_89472.png",
+                            "category_name": null,
+                            "category_id": null
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "api_request": {
+                      "type": "object",
+                      "properties": {
+                        "Single Images": {
+                          "type": "object",
+                          "properties": {
+                            "\"image_id\"": {
+                              "type": "object",
+                              "properties": {
+                                "image_name": {
+                                  "type": "string"
+                                },
+                                "classified": {
+                                  "type": "boolean"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "classified_dict": {
+                      "type": "object",
+                      "properties": {
+                        "\"class_name\"": {
+                          "type": "object",
+                          "properties": {
+                            "\"image_id\"": {
+                              "type": "object",
+                              "properties": {
+                                "image_name": {
+                                  "type": "string"
+                                },
+                                "category_name": {
+                                  "type": "null"
+                                },
+                                "category_id": {
+                                  "type": "null"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "APIKey": {
+        "name": "APIKey",
+        "type": "apiKey",
+        "in": "query"
+      }
+    }
+  }
+}

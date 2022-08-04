@@ -1,0 +1,253 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "lm1p8dsqq9a06"
+  },
+  "info": {
+    "title": "Create a Project",
+    "version": "1.0",
+    "summary": "Create a new project on the server",
+    "description": "This API is used to create a new project on the server and also retrieve information about existing projects you created on the server",
+    "license": {
+      "name": "MIT",
+      "url": "https://choosealicense.com/licenses/mit/"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8001"
+    }
+  ],
+  "paths": {
+    "/api/new_project/": {
+      "parameters": [],
+      "get": {
+        "summary": "Create a Project",
+        "tags": [],
+        "operationId": "'project-create'",
+        "description": "Retrieve the information of about the existing projects you created on the server.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "pk": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "author": {
+                      "type": "integer"
+                    },
+                    "organization": {
+                      "type": "integer"
+                    },
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pk": {
+                            "type": "integer"
+                          },
+                          "user_name": {
+                            "type": "string"
+                          },
+                          "test_user_name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "date_created": {
+                      "type": "string"
+                    }
+                  },
+                  "x-examples": {
+                    "example-1": {
+                      "pk": 1,
+                      "name": "sample-project",
+                      "author": 1,
+                      "organization": 1,
+                      "users": [
+                        [
+                          {
+                            "pk": 1
+                          },
+                          {
+                            "user_name": "testuser"
+                          },
+                          {
+                            "test_user_name": "testusername"
+                          }
+                        ]
+                      ],
+                      "date_created": "2022-08-02T21:15:55.786467Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a Project",
+        "operationId": "postapi-new_project",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "example-1": {
+                      "pk": 1,
+                      "name": "sample-project",
+                      "author": 1,
+                      "organization": 1,
+                      "users": [
+                        {
+                          "pk": 1,
+                          "user_name": "testuser",
+                          "test_user_name": "testusername"
+                        }
+                      ],
+                      "date_created": "2022-08-02T21:15:55.786467Z",
+                      "description": "",
+                      "status": "training",
+                      "deleted": "False"
+                    }
+                  },
+                  "properties": {
+                    "pk": {
+                      "type": "integer",
+                      "description": "Project ID"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Project Name"
+                    },
+                    "author": {
+                      "type": "integer",
+                      "description": "Author ID for the User"
+                    },
+                    "organization": {
+                      "type": "integer",
+                      "description": "Organization ID"
+                    },
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "pk": {
+                            "type": "integer",
+                            "description": "User ID who has access to the project"
+                          },
+                          "user_name": {
+                            "type": "string",
+                            "description": "Username"
+                          }
+                        }
+                      }
+                    },
+                    "date_created": {
+                      "type": "string",
+                      "description": "Date when the project was project"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Project Description"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "Project Trainable Status"
+                    },
+                    "deleted": {
+                      "type": "string",
+                      "description": "Project Deletetion status"
+                    }
+                  }
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "pk": 1,
+                      "name": "sample-project",
+                      "author": 1,
+                      "organization": 1,
+                      "users": [
+                        {
+                          "pk": 1,
+                          "user_name": "testuser"
+                        }
+                      ],
+                      "date_created": "2022-08-02T21:15:55.786467Z",
+                      "description": "",
+                      "status": "training",
+                      "deleted": "False"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Create a new project on the server",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "x-examples": {
+                  "example-1": {
+                    "name": "sample-project"
+                  }
+                },
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "New Name of the Project"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              },
+              "examples": {
+                "example-1": {
+                  "value": {
+                    "name": "sample-new-project"
+                  }
+                }
+              }
+            }
+          },
+          "description": "{\n  \"name\": \"sample-project\"\n}"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "APIKey": {
+        "name": "apiKey",
+        "type": "apiKey",
+        "in": "query"
+      }
+    },
+    "requestBodies": {},
+    "responses": {}
+  },
+  "x-internal": false
+}
